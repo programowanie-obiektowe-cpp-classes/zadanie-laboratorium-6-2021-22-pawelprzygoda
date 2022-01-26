@@ -5,12 +5,20 @@
 #include <algorithm>
 #include <list>
 #include <vector>
+using namespace std;
 
-std::vector< char > foo(std::list< Human >& people)
+
+vector< char > foo(list< Human >& people)
 {
-    std::vector< char > ret_v(people.size());
+    vector< char > ret_v(people.size());
+    for_each(begin(people), end(people), [](Human& person) { person.birthday(); });
+    transform(begin(people), end(people), rbegin(ret_v), [](Human& person) 
+    {
+        if (person.isMonster() == true)
+            return 'n';
+        else
+            return 'y';
+    });
 
-    // Twoja implementacja tutaj
-
-    return ret_v;
+   return ret_v;
 }
